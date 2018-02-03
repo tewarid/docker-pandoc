@@ -2,6 +2,14 @@
 
 Creates a Docker image with Pandoc, TeX packages to run the [eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template/) template, Node.js, and [mermaid-filter](https://github.com/raghur/mermaid-filter).
 
+## Pull image from Docker
+
+To fetch the latest automated build image from Docker Hub
+
+```bash
+docker pull tewarid/pandoc
+```
+
 ## Build Docker image
 
 To build a new image

@@ -66,7 +66,7 @@ RUN set -ex \
 
 COPY . /root/
 
-## mermaid-filter
+## mermaid-filter (and patch - see README.md)
 
 WORKDIR /root
 
@@ -80,6 +80,8 @@ RUN apt-get update -y \
     fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils \
     && yarn add mermaid-filter \
     && cp index.bundle.js node_modules/mermaid.cli/
+
+ENV PATH /root/node_modules/.bin:$PATH
 
 ## TeX Live
 
