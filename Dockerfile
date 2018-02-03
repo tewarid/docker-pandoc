@@ -62,39 +62,6 @@ RUN set -ex \
   && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
-# Install TeX Live, mermaid-filter and dependencies
-
-COPY . /root/
-
-## mermaid-filter (and patch - see README.md)
-
-WORKDIR /root
-
-RUN apt-get update -y \
-    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget \
-    gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
-    libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
-    libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 \
-    libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 \
-    libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
-    fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils \
-    && yarn add mermaid-filter \
-    && cp index.bundle.js node_modules/mermaid.cli/
-
-ENV PATH /root/node_modules/.bin:$PATH
-
-## TeX Live
-
-WORKDIR /root/install-tl-20180131/
-
-RUN apt-get update -y \
-    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern \
-    && ./install-tl -profile texlive.profile
-
-ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
-
-WORKDIR /root
-
 # Install Haskell 8.2
 # https://github.com/freebroccolo/docker-haskell/blob/ea501abb24273d6dab3121bb6373f6903f1a3c71/8.2/Dockerfile
 
@@ -125,7 +92,38 @@ ENV PANDOC_VERSION "2.1.1"
 ## install pandoc
 RUN cabal update && cabal install pandoc-${PANDOC_VERSION}
 
-# Install tex packages required by eisvogel template
+# Install TeX Live
+
+COPY install-tl-20180131 /root/install-tl-20180131
+
+WORKDIR /root/install-tl-20180131/
+
+RUN apt-get update -y \
+    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern \
+    && ./install-tl -profile texlive.profile
+
+ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+
+# mermaid-filter and patch (see README.md)
+
+COPY index.bundle.js /root/
+
+WORKDIR /root
+
+RUN apt-get update -y \
+    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget \
+    gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
+    libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
+    libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 \
+    libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 \
+    libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
+    fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils \
+    && yarn add mermaid-filter@1.1.0 \
+    && cp index.bundle.js node_modules/mermaid.cli/
+
+ENV PATH /root/node_modules/.bin:$PATH
+
+# Install TeX packages used by eisvogel template (see README.md)
 
 RUN tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
