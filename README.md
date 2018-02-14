@@ -32,6 +32,8 @@ Here's how you can invoke it in a Docker container
 docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container pandoc-image ./topdf.sh
 ```
 
+On Windows, replace `pwd` with path to a folder.
+
 To run the same script again
 
 ```bash
