@@ -20,19 +20,24 @@ docker build -t pandoc-image .
 
 ## Run Pandoc
 
-Assuming you have a bash script on the host such as
+Assuming you have a bash script `run-pandoc.sh` on the host such as
 
 ```bash
+#!/bin/bash
 pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template ./eisvogel.tex --variable titlepage=true
 ```
 
 Here's how you can invoke it in a Docker container
 
 ```bash
-docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container pandoc-image ./topdf.sh
+docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container pandoc-image ./run-pandoc.sh
 ```
 
-On Windows, replace `pwd` with path to a folder.
+On Windows, an equivalent PowerShell command may look like
+
+```powershell
+docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container tewarid/pandoc ./run-pandoc.sh
+```
 
 To run the same script again
 
@@ -48,14 +53,14 @@ docker rm pandoc-container
 
 ## Known Issues
 
-- Calling [mermaid.cli](https://github.com/mermaidjs/mermaid.cli) as root (default user in a Docker container) fails with the error
+Calling [mermaid.cli](https://github.com/mermaidjs/mermaid.cli) as root (default user in a Docker container) fails with the error
 
-    ```text
-    [0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
-    ```
+```text
+[0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+```
 
-    To fix it, file [index.bundle.js](index.bundle.js) needs to be patched, so that it launches puppeteer thus
+To fix it, file [index.bundle.js](index.bundle.js) needs to be patched, so that it launches puppeteer thus
 
-    ```javascript
-    const browser = yield puppeteer.launch({args: ['--no-sandbox']});
-    ```
+```javascript
+const browser = yield puppeteer.launch({args: ['--no-sandbox']});
+```
