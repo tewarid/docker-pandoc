@@ -24,7 +24,7 @@ Assuming you have a bash script `run-pandoc.sh` on the host such as
 
 ```bash
 #!/bin/bash
-pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template ./eisvogel.tex --variable titlepage=true
+pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template ./eisvogel.tex --variable titlepage=true --variable caption-justification=centering
 ```
 
 Here's how you can invoke it in a Docker container
