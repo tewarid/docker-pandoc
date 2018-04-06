@@ -26,7 +26,7 @@ ENV PATH /root/.cabal/bin:/root/.local/bin:/opt/cabal/2.0/bin:/opt/ghc/8.2.1/bin
 # Install Pandoc
 # Adds about 1.23GB to image size
 
-ENV PANDOC_VERSION "2.1.1"
+ENV PANDOC_VERSION "2.1.3"
 
 RUN cabal update && cabal install pandoc-${PANDOC_VERSION}
 
