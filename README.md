@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/tewarid/pandoc.svg)](https://microbadger.com/images/tewarid/pandoc "Get your own image badge on microbadger.com")
+
 # Pandoc Dockerfile
 
 Creates a Docker image with Pandoc, TeX packages to run the [eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template/) template, Node.js, and [mermaid-filter](https://github.com/raghur/mermaid-filter).
