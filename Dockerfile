@@ -1,7 +1,6 @@
 FROM node:8-slim
 
 # Install Haskell 8.2
-# Adds about 910MB to image size
 
 ## ensure locale is set during build
 ENV LANG            C.UTF-8
@@ -24,14 +23,12 @@ RUN echo 'deb http://ppa.launchpad.net/hvr/ghc/ubuntu trusty main' > /etc/apt/so
 ENV PATH /root/.cabal/bin:/root/.local/bin:/opt/cabal/2.0/bin:/opt/ghc/8.2.1/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.7/bin:$PATH
 
 # Install Pandoc
-# Adds about 1.23GB to image size
 
 ENV PANDOC_VERSION "2.1.3"
 
 RUN cabal update && cabal install pandoc-${PANDOC_VERSION}
 
 # Install TeX Live
-# Adds about 545MB to image size
 
 COPY install-tl-20180131 /root/install-tl-20180131
 
@@ -44,7 +41,6 @@ RUN apt-get update -y \
 ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
 
 # Install mermaid-filter and patch
-# Adds about 536MB to image size
 
 COPY index.bundle.js /root/
 
@@ -64,7 +60,6 @@ RUN apt-get update -y \
 ENV PATH /root/node_modules/.bin:$PATH
 
 # Install TeX packages used by eisvogel template
-# Adds about 39.7MB to image size
 
 RUN tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
