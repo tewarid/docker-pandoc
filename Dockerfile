@@ -30,9 +30,9 @@ RUN cabal update && cabal install pandoc-${PANDOC_VERSION}
 
 # Install TeX Live
 
-COPY install-tl-20180131 /root/install-tl-20180131
+COPY install-tl-20180630 /root/install-tl-20180630
 
-WORKDIR /root/install-tl-20180131/
+WORKDIR /root/install-tl-20180630/
 
 RUN apt-get update -y \
     && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern \
