@@ -1,7 +1,7 @@
-# texlive.profile written on Mon Jul  2 10:47:36 2018 UTC
+# texlive.profile written on Mon Jul  2 13:23:36 2018 UTC
 # It will NOT be updated and reflects only the
 # installation profile at installation time.
-selected_scheme scheme-custom
+selected_scheme scheme-small
 TEXDIR /usr/local/texlive/2018
 TEXMFCONFIG ~/.texlive2018/texmf-config
 TEXMFHOME ~/texmf
