@@ -55,14 +55,30 @@ docker rm pandoc-container
 
 ## Known Issues
 
-Calling [mermaid.cli](https://github.com/mermaidjs/mermaid.cli) as root (default user in a Docker container) fails with the error
+1. You may get the following error message with mermaid-filter
 
-```text
-[0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
-```
+    ```text
+    [0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+    ```
 
-To fix it, file [index.bundle.js](index.bundle.js) needs to be patched, so that it launches puppeteer thus
+    To fix it, create a file called `.puppeteer.json` in the directory you run pandoc, that contains
 
-```javascript
-const browser = yield puppeteer.launch({args: ['--no-sandbox']});
-```
+    ```json
+    {
+    "args": ["--no-sandbox"]
+    }
+    ```
+
+## Tips
+
+1. You can control the output of mermaid, by creating a `.mermaid-config.json` file in the directory you run pandoc
+
+    ```json
+    {
+        "startOnLoad": true,
+        "sequenceDiagram": {
+            "useMaxWidth": false,
+            "mirrorActors": false
+        }
+    }
+    ```

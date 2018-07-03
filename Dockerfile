@@ -42,8 +42,6 @@ ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
 # Install mermaid-filter and patch
 
-COPY index.bundle.js /root/
-
 WORKDIR /root
 
 RUN apt-get update -y \
@@ -54,8 +52,7 @@ RUN apt-get update -y \
     libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 \
     libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
     fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils \
-    && yarn add mermaid-filter@1.1.0 \
-    && cp index.bundle.js node_modules/mermaid.cli/
+    && yarn add mermaid-filter@1.2.0
 
 ENV PATH /root/node_modules/.bin:$PATH
 
