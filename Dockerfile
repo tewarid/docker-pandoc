@@ -38,7 +38,7 @@ RUN apt-get update -y \
     && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern \
     && ./install-tl -profile texlive.profile
 
-ENV PATH /usr/local/texlive/2017/bin/x86_64-linux:$PATH
+ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
 # Install mermaid-filter and patch
 
