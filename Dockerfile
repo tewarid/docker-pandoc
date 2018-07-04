@@ -35,12 +35,12 @@ COPY install-tl-20180701 /root/install-tl-20180701
 WORKDIR /root/install-tl-20180701/
 
 RUN apt-get update -y \
-    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern \
+    && apt-get install -y -o Acquire::Retries=10 --no-install-recommends wget fontconfig lmodern librsvg2-bin \
     && ./install-tl -profile texlive.profile
 
 ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
 
-# Install mermaid-filter and patch
+# Install mermaid-filter
 
 WORKDIR /root
 
