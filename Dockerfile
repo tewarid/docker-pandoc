@@ -61,4 +61,4 @@ ENV PATH /root/node_modules/.bin:$PATH
 RUN tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
     sourcecodepro titling pagecolor epstopdf \
-    && apt-get install ghostscript
+    && apt-get install  -y -o Acquire::Retries=10 --no-install-recommends ghostscript
