@@ -56,8 +56,9 @@ RUN apt-get update -y \
 
 ENV PATH /root/node_modules/.bin:$PATH
 
-# Install TeX packages used by eisvogel template
+# Install additional packages such as those used by eisvogel template
 
 RUN tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor
+    sourcecodepro titling pagecolor epstopdf \
+    && apt-get install ghostscript
