@@ -24,7 +24,7 @@ ENV PATH /root/.cabal/bin:/root/.local/bin:/opt/cabal/2.0/bin:/opt/ghc/8.2.1/bin
 
 # Install Pandoc
 
-ENV PANDOC_VERSION "2.1.3"
+ENV PANDOC_VERSION "2.2.1"
 
 RUN cabal update && cabal install pandoc-${PANDOC_VERSION}
 
