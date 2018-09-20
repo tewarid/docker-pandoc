@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #
 # Run Pandoc with eisvogel.tex template
 #
