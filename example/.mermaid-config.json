@@ -1,8 +1,0 @@
-{
-    "startOnLoad": true,
-    "theme": "forest",
-    "sequenceDiagram": {
-      "useMaxWidth": false,
-      "mirrorActors": false
-    }
-}
