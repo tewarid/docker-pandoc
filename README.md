@@ -56,7 +56,7 @@ docker rm pandoc-container
 
 ## Known Issues
 
-1. You may get the following error message with mermaid-filter
+1. You will get the following error message with mermaid-filter
 
     ```text
     [0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
@@ -67,19 +67,5 @@ docker rm pandoc-container
     ```json
     {
     "args": ["--no-sandbox"]
-    }
-    ```
-
-## Tips
-
-1. You can control the output of mermaid, by creating a `.mermaid-config.json` file in the directory you run pandoc
-
-    ```json
-    {
-        "startOnLoad": true,
-        "sequenceDiagram": {
-            "useMaxWidth": false,
-            "mirrorActors": false
-        }
     }
     ```
