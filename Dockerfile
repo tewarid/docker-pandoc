@@ -5,7 +5,7 @@ FROM pandoc/latex
 RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
     tlmgr update \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor epstopdf \
+    sourcecodepro titling pagecolor epstopdf zref \
     && apk add --update ghostscript
 
 # Install Node and mermaid-filter
