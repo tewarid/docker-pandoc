@@ -18,7 +18,7 @@ docker pull tewarid/pandoc
 To build a new image
 
 ```bash
-docker build -t pandoc-image .
+docker build -t tewarid/pandoc .
 ```
 
 ## Run Pandoc
@@ -33,13 +33,13 @@ pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template
 Here's how you can invoke it in a Docker container
 
 ```bash
-docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container pandoc-image ./run-pandoc.sh
+docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container --entrypoint "/workdir/run-pandoc.sh" tewarid/pandoc
 ```
 
 On Windows, an equivalent PowerShell command may look like
 
 ```powershell
-docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container tewarid/pandoc ./run-pandoc.sh
+docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container --entrypoint "/bin/sh ./run-pandoc.sh" tewarid/pandoc
 ```
 
 To run the same script again
