@@ -10,9 +10,7 @@ RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
 
 # Install Node and mermaid-filter
 
-WORKDIR /root
-
 RUN apk add --update npm \
-    && npm install mermaid-filter@1.4.4
+    && npm install -g mermaid-filter@1.4.4 --unsafe-perm=true
 
-ENV PATH /root/node_modules/.bin:$PATH
+ENV PATH /usr/lib/node_modules/.bin:$PATH
