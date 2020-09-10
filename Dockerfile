@@ -10,5 +10,8 @@ RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
 
 # Install Node and mermaid-filter
 
-RUN apk add --update npm \
+ENV CHROME_BIN="/usr/bin/chromium-browser" \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+
+RUN apk add --update udev ttf-freefont chromium npm \
     && npm install -g mermaid-filter@1.4.4 --unsafe-perm=true

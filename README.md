@@ -69,16 +69,31 @@ docker rm pandoc-container
 
 ## Known Issues
 
-1. You will get the following error message with mermaid-filter
+1. You will get an error message such as the following with mermaid-filter
 
     ```text
-    [0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+    events.js:292
+        throw er; // Unhandled 'error' event
+        ^
+
+    Error: ENOENT: no such file or directory, open '/tmp/tmp-11UOaQJNu37LGm.tmp.png'
+    Emitted 'error' event on ReadStream instance at:
+        at internal/fs/streams.js:136:12
+        at FSReqCallback.oncomplete (fs.js:156:23) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/tmp-11UOaQJNu37LGm.tmp.png'
+    }
+    Error running filter mermaid-filter:
+    Filter returned error status 1
     ```
 
     To fix it, create a file called `.puppeteer.json` in the directory you run pandoc, that contains
 
     ```json
     {
-    "args": ["--no-sandbox"]
+        "executablePath": "/usr/bin/chromium-browser",
+        "args": ["--no-sandbox"]
     }
     ```
