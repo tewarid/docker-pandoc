@@ -13,6 +13,19 @@ To fetch the latest automated build image from Docker Hub
 docker pull tewarid/pandoc
 ```
 
+This pulls the latest tag built from main branch and may not always be stable, hence it is recommended you pull a stable tag
+
+```bash
+docker pull tewarid/pandoc:1.0
+```
+
+Stable versions are tagged manually from latest and pushed to Docker Hub
+
+```bash
+docker tag tewarid/pandoc:latest tewarid/pandoc:1.0
+docker push tewarid/pandoc:1.0
+```
+
 ## Build Docker image
 
 To build a new image
@@ -33,13 +46,13 @@ pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template
 Here's how you can invoke it in a Docker container
 
 ```bash
-docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container --entrypoint "/workdir/run-pandoc.sh" tewarid/pandoc
+docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container --entrypoint "/workdir/run-pandoc.sh" tewarid/pandoc:1.0
 ```
 
 On Windows, an equivalent PowerShell command may look like
 
 ```powershell
-docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container --entrypoint "/bin/sh ./run-pandoc.sh" tewarid/pandoc
+docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container --entrypoint "/bin/sh ./run-pandoc.sh" tewarid/pandoc:1.0
 ```
 
 To run the same script again
