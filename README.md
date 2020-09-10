@@ -13,12 +13,25 @@ To fetch the latest automated build image from Docker Hub
 docker pull tewarid/pandoc
 ```
 
+This pulls the latest tag built from main branch and may not always be stable, hence it is recommended you pull a stable tag
+
+```bash
+docker pull tewarid/pandoc:1.0
+```
+
+Stable versions are tagged manually from latest and pushed to Docker Hub
+
+```bash
+docker tag tewarid/pandoc:latest tewarid/pandoc:1.0
+docker push tewarid/pandoc:1.0
+```
+
 ## Build Docker image
 
 To build a new image
 
 ```bash
-docker build -t pandoc-image .
+docker build -t tewarid/pandoc .
 ```
 
 ## Run Pandoc
@@ -33,13 +46,13 @@ pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template
 Here's how you can invoke it in a Docker container
 
 ```bash
-docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container pandoc-image ./run-pandoc.sh
+docker run -v `pwd`:/workdir -w /workdir -i -t --name pandoc-container --entrypoint "/workdir/run-pandoc.sh" tewarid/pandoc:1.0
 ```
 
 On Windows, an equivalent PowerShell command may look like
 
 ```powershell
-docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container tewarid/pandoc ./run-pandoc.sh
+docker run -i -t -v ${PWD}:/workdir -w /workdir --name pandoc-container --entrypoint "/bin/sh ./run-pandoc.sh" tewarid/pandoc:1.0
 ```
 
 To run the same script again
@@ -56,16 +69,31 @@ docker rm pandoc-container
 
 ## Known Issues
 
-1. You will get the following error message with mermaid-filter
+1. You will get an error message such as the following with mermaid-filter
 
     ```text
-    [0202/115116.882391:ERROR:zygote_host_impl_linux.cc(88)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+    events.js:292
+        throw er; // Unhandled 'error' event
+        ^
+
+    Error: ENOENT: no such file or directory, open '/tmp/tmp-11UOaQJNu37LGm.tmp.png'
+    Emitted 'error' event on ReadStream instance at:
+        at internal/fs/streams.js:136:12
+        at FSReqCallback.oncomplete (fs.js:156:23) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/tmp-11UOaQJNu37LGm.tmp.png'
+    }
+    Error running filter mermaid-filter:
+    Filter returned error status 1
     ```
 
     To fix it, create a file called `.puppeteer.json` in the directory you run pandoc, that contains
 
     ```json
     {
-    "args": ["--no-sandbox"]
+        "executablePath": "/usr/bin/chromium-browser",
+        "args": ["--no-sandbox"]
     }
     ```
