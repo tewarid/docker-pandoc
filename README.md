@@ -39,7 +39,7 @@ docker build -t tewarid/pandoc .
 Assuming you have a bash script `run-pandoc.sh` on the host such as
 
 ```bash
-#!/bin/bash
+#!/bin/sh
 pandoc title.md doc.md -f markdown -o doc.pdf --toc -F mermaid-filter --template ./eisvogel.tex --variable titlepage=true --variable caption-justification=centering
 ```
 
