@@ -14,4 +14,4 @@ ENV CHROME_BIN="/usr/bin/chromium-browser" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 
 RUN apk add --update udev ttf-freefont chromium npm \
-    && npm install -g mermaid-filter@1.4.4 --unsafe-perm=true
+    && npm install -g mermaid-filter@1.4.5 --unsafe-perm=true
