@@ -31,7 +31,7 @@ docker push tewarid/pandoc:1.0
 To build a new image
 
 ```bash
-docker build -t tewarid/pandoc .
+docker build -t tewarid/pandoc:latest .
 ```
 
 ## Run Pandoc
