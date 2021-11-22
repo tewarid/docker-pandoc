@@ -16,7 +16,7 @@ docker pull tewarid/pandoc
 This pulls the latest tag built from main branch and may not always be stable, hence it is recommended you pull a stable tag
 
 ```bash
-docker pull tewarid/pandoc:1.0
+docker pull tewarid/pandoc:latest
 ```
 
 Stable versions are tagged manually from latest and pushed to Docker Hub
