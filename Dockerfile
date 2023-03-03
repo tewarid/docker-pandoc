@@ -1,4 +1,4 @@
-FROM pandoc/latex:2.16.2
+FROM pandoc/latex:latest
 
 # Install additional TeX packages such as those used by eisvogel template
 
