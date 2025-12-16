@@ -1,6 +1,6 @@
 ---
 title: "Pandoc Docker Image"
 subtitle: "Example"
-version: "01.00"
-date: July 3, 2018
+version: "00.02"
+date: Dec 16, 2025
 ...
